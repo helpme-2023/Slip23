@@ -19,7 +19,7 @@ print(df.isnull())
 # filling missing value using fillna()
 print("\n After filling null values with 0");
 print(df.fillna(0)) 
-----------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 ii)Reading from CSV  -------- csv file
 
 import pandas as pd
@@ -33,3 +33,16 @@ bool_series = pd.isnull(data["Gender"])
 # filtering data 
 # displaying data only with Gender = NaN 
 data[bool_series]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Dropping missing values using dropna()
+import pandas as pd
+import numpy as np
+data = pd.read_csv("D:\MSc(Practicals)\employees.csv") 
+bool_series = pd.isnull(data['Gender'])
+print(data[bool_series])
+# using dropna() function
+df=data.dropna()
+bool_series = pd.isnull(df['Gender'])
+print(df[bool_series])
+df
