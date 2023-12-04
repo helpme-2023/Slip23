@@ -2,16 +2,13 @@ Create your own blog using Django.
 
 Create a new Django project and a blog app:
 bash
-Copy code
 django-admin startproject myblogproject
 cd myblogproject
 python manage.py startapp blog
 Define models for the blog app:
+============================================================================================
 Edit the blog/models.py file:
-
-python
-Copy code
-# blog/models.py
+models.py ------->
 from django.db import models
 from django.utils import timezone
 
@@ -22,27 +19,28 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+===============================================================================================
 Run migrations to create the database tables:
 bash
 Copy code
 python manage.py makemigrations
 python manage.py migrate
+
+
 Create admin panel for the blog app:
 Edit the blog/admin.py file:
 
-python
-Copy code
-# blog/admin.py
+admin.py------->
 from django.contrib import admin
 from .models import Post
 
 admin.site.register(Post)
+--------------------------------------------------------------------------------------------
 Create views for the blog app:
 Edit the blog/views.py file:
 
-python
-Copy code
-# blog/views.py
+views.py ----------->
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 
@@ -53,12 +51,12 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
+=============================================================================================
 Create URL patterns for the blog app:
 Edit the blog/urls.py file:
 
-python
-Copy code
-# blog/urls.py
+urls.py-------------->
 from django.urls import path
 from . import views
 
@@ -67,12 +65,11 @@ urlpatterns = [
     path('', views.post_list, name='post_list'),
     path('<int:pk>/', views.post_detail, name='post_detail'),
 ]
+============================================================================================
 Include the blog app URLs in the project's urls.py file:
 Edit the myblogproject/urls.py file:
 
-python
-Copy code
-# myblogproject/urls.py
+urls.py---------->
 from django.contrib import admin
 from django.urls import include, path
 
@@ -80,11 +77,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
 ]
+
+==================================================================
 Create templates for the blog app:
 Create a blog/templates/blog/post_list.html file:
 
-html
-Copy code
+
 <!-- blog/templates/blog/post_list.html -->
 {% extends 'base.html' %}
 
@@ -96,10 +94,9 @@ Copy code
     <p>{{ post.content }}</p>
   {% endfor %}
 {% endblock %}
+=========================================================================
 Create a blog/templates/blog/post_detail.html file:
 
-html
-Copy code
 <!-- blog/templates/blog/post_detail.html -->
 {% extends 'base.html' %}
 
@@ -108,10 +105,9 @@ Copy code
   <p>{{ post.pub_date }}</p>
   <p>{{ post.content }}</p>
 {% endblock %}
+========================================================================
 Create a blog/templates/base.html file:
 
-html
-Copy code
 <!-- blog/templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -126,6 +122,7 @@ Copy code
     </div>
 </body>
 </html>
+=======================================================================
 Run the development server:
 bash
 Copy code
